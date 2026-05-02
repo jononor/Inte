@@ -1,0 +1,39 @@
+1;Ett litet rum med kala väggar och ett flämtande ljus i taket.;
+1;Ett madrasserat rum utan fönster.;
+1;En korridor med smutsigt golv och stängda fönster.;
+1;Ett rum klätt i guld. Märkligt.;
+
+2;En mörk källare med fuktiga väggar.;
+2;Ett övergivet kontor med trasiga stolar.;
+2;Ett smalt gångutrymme som luktar mögel.;
+2;Ett rum där väggarna glimmar svagt av blått ljus.;
+
+3;Ett snötäckt fält med dålig sikt.;
+3;En övergiven stuga med en brinnande lykta.;
+3;En isig grotta där vinden tjuter.;
+3;En plats där snön lyser svagt och något skymtar under ytan.;
+
+4;Ett ökenlandskap med bara sand så långt ögat når.;
+4;En ruin täckt av mossa och tystnad.;
+4;Ett dammigt torp med trasiga fönster.;
+4;En oas. Nej, alltså I en oas. Du är nu blöt.;
+
+5;Ett nedgånget kvarter med fladdrande gatulampor.;
+5;En mörk gränd fylld av dimma.;
+5;Ett övervuxet parkeringsgarage.;
+5;Ett rum med statyer, deras skepnad är okänd med den dåliga belysningen.;
+
+6;En skogsdunge där träden viskar i vinden.;
+6;Ett sumpigt område med stillastående vatten.;
+6;En stig kantad av döda löv och tystnad.;
+6;Ett träsk, du är blöt.;
+
+7;Ett laboratorium med blinkande paneler.;
+7;En kall metallkorridor med ekande steg.;
+7;Ett kontrollrum täckt av damm och trasiga skärmar.;
+7;Ett badrum med trasigt kakel, det rinner vatten längs vattenrören.;
+
+8;Ett mörkt tempel täckt av symboler ingen längre förstår.;
+8;En underjordisk sal med kolonner av sten.;
+8;Ett rum fyllt av stilla vatten och tystnad.;
+8;En kammare med ett altare.;
