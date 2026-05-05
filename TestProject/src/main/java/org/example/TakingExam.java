@@ -18,6 +18,12 @@ public class TakingExam extends State{
 
     public TakingExam(InputReader inputReader, StateMachine stateMachine) {
         super(inputReader, stateMachine);
+
+        table = new LinkedList[HASH_SIZE];
+        for (int index = 0; index < table.length; index++) {
+            table[index] = new LinkedList();
+        }
+
         choices.add("Leave exam");
         choices.add("CourseBook 1");
         choices.add("CourseBook 2");
@@ -112,5 +118,175 @@ public class TakingExam extends State{
         questions.add(question9);
         Question question10 = new Question("Last question: What is the biggest city language", 10);
         questions.add(question10);
+    }
+
+
+    private static final int PRIM_NUMBER_FIVE = 5;
+    private static final int PRIM_NUMBER_THREE = 3;
+    private static final int NEGATIVE_ONE = -1;
+    private static final int HASH_SIZE = 100;
+    private static LinkedList[] table;
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (this == obj) {
+            return true;
+        }
+        TakingExam other = (TakingExam) obj;
+        for (int index = 0; index < table.length; index++) {
+            if (!table[index].equals(other.table[index])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return PRIM_NUMBER_FIVE * PRIM_NUMBER_THREE;
+    }
+
+
+    public static class LinkedList {
+        private static int count = 0;
+        private Node head;
+        private int size;
+
+        public static class Node {
+            private int id;
+            private String data;
+            private LinkedList list;
+            private Node next;
+
+            public Node(String data) {
+                this.data = data;
+                this.list = new LinkedList();
+                this.id = count++;
+            }
+
+            public String getData() {
+                return data;
+            }
+            public int getId() {
+                return id;
+            }
+            public LinkedList getList() {
+                return list;
+            }
+
+
+            @Override
+            public boolean equals(Object obj) {
+                if (this == obj) {
+                    return true;
+                }
+                if (obj == null) {
+                    return false;
+                }
+                Node other = (Node) obj;
+                if (this.id == other.id && this.data == other.data) {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        public static int getCount() {
+            return count;
+        }
+        public int getSize() {
+            return size;
+        }
+        public void increaseListSize() {
+            size++;
+        }
+
+        public void addData(String newData) {
+            isDataIsIllegalArgument(newData);
+            int index = getHashValue(newData);
+            if (index < 0) {
+                index = toPositive(index);
+            }
+            Node newNode = new Node(newData);
+            table[index].addNode(newNode);
+        }
+
+        public void addNode(Node node) {
+            if (head == null) {
+                head = node;
+                increaseListSize();
+            } else {
+                Node current = head;
+                while (current.next != null) {
+                    current = current.next;
+                }
+                current.next = node;
+                increaseListSize();
+            }
+        }
+
+        public boolean contains(String data) {
+            isDataIsIllegalArgument(data);
+            int index = getHashValue(data);
+            if (index < 0 ) {
+                index = toPositive(index);
+            }
+            Node current = table[index].head;
+            while (current.next != null) {
+                if (current.data.equals(data)) {
+                    return true;
+                }
+                current = current.next;
+            }
+            return false;
+        }
+
+        public void remove(String data) {
+            isDataIsIllegalArgument(data);
+            int index = getHashValue(data);
+            if (index < 0 ) {
+                index = toPositive(index);
+            }
+            Node current = table[index].head;
+            Node prev = current;
+            while (current.next != null) {
+                if (current.data.equals(data)) {
+                    if(current == head) {
+                        head = current.next;
+                    }
+                    prev.next = current.next;
+                    current.next = null;
+                    return;
+                }
+                prev = current;
+                current = current.next;
+            }
+        }
+
+        private void isDataIsIllegalArgument(String data) {
+            if (data == null || data.trim().isEmpty()) {
+                throw new IllegalArgumentException();
+            }
+        }
+
+        private int getHashValue(String data) {
+            int HashValue = 1;
+            for (int index = 0; index < data.length(); index++) {
+                char holder = data.charAt(index);
+                HashValue *= data.hashCode() + holder;
+            }
+            return HashValue % HASH_SIZE;
+        }
+
+        private int toPositive(int num) {
+            return num * NEGATIVE_ONE;
+        }
+
+
+
     }
 }

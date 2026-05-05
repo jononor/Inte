@@ -132,6 +132,7 @@ public class TakingExamTest {
         assertEquals(EXAM_COMPLETED, exam.getQuestionsAnswered()); // Shouldn't increment
     }
 
+    //testa buffer overflow på
 
 
 }
