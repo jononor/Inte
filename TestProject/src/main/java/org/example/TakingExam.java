@@ -3,7 +3,7 @@ package org.example;
 import java.util.*;
 
 public class TakingExam extends State{
-
+    //kke
     private static final int QUESTIONS_TO_BEAT_GAME = 9;
     private int questionsAnswered = 0;
 
