@@ -3,9 +3,15 @@ package org.example;
 import java.util.*;
 
 public class TakingExam extends State{
-    //kke
+
     private static final int QUESTIONS_TO_BEAT_GAME = 9;
+    private static final int PRIM_NUMBER_FIVE = 5;
+    private static final int PRIM_NUMBER_THREE = 3;
+    private static final int NEGATIVE_ONE = -1;
+    private static final int HASH_SIZE = 100;
+    private static LinkedList[] table;
     private int questionsAnswered = 0;
+
 
     /**
      * ska inte vara i klassen. Är igentligen en global variabel. ÄR bara här för tydliggöra hur getChoices metoden använder courseBook
@@ -23,6 +29,18 @@ public class TakingExam extends State{
         for (int index = 0; index < table.length; index++) {
             table[index] = new LinkedList();
         }
+
+        table[0].addData("Leave exam");
+        table[0].addData("CourseBook 1");
+        table[0].addData("CourseBook 2");
+        table[0].addData("CourseBook 3");
+        table[0].addData("CourseBook 4");
+        table[0].addData("CourseBook 5");
+        table[0].addData("CourseBook 6");
+        table[0].addData("CourseBook 7");
+        table[0].addData("CourseBook 8");
+        table[0].addData("CourseBook 9");
+        table[0].addData("CourseBook 10");
 
         choices.add("Leave exam");
         choices.add("CourseBook 1");
@@ -59,7 +77,7 @@ public class TakingExam extends State{
 
 
     public List<String> getChoices(List<String> playerOptions) {
-
+        //Question currentQuestion = table.get(questionsAnswered);
         Question currentQuestion = questions.get(questionsAnswered);
         System.out.println(currentQuestion.getQuestion());
 
@@ -74,6 +92,7 @@ public class TakingExam extends State{
     public StateMachine.States getNextState(int result) {
         StateMachine.States nextState;
         result = result - 1;
+        //Question currentQuestion = table.get(questionsAnswered);
         Question currentQuestion = questions.get(questionsAnswered);
         if(questionsAnswered == QUESTIONS_TO_BEAT_GAME) {
             System.out.println("Congratulations! You have completed the exam!");
@@ -119,13 +138,6 @@ public class TakingExam extends State{
         Question question10 = new Question("Last question: What is the biggest city language", 10);
         questions.add(question10);
     }
-
-
-    private static final int PRIM_NUMBER_FIVE = 5;
-    private static final int PRIM_NUMBER_THREE = 3;
-    private static final int NEGATIVE_ONE = -1;
-    private static final int HASH_SIZE = 100;
-    private static LinkedList[] table;
 
 
     @Override
@@ -205,15 +217,6 @@ public class TakingExam extends State{
             size++;
         }
 
-        public void addData(String newData) {
-            isDataIsIllegalArgument(newData);
-            int index = getHashValue(newData);
-            if (index < 0) {
-                index = toPositive(index);
-            }
-            Node newNode = new Node(newData);
-            table[index].addNode(newNode);
-        }
 
         public void addNode(Node node) {
             if (head == null) {
@@ -229,13 +232,23 @@ public class TakingExam extends State{
             }
         }
 
+        public void addData(String newData) {
+            isDataIsIllegalArgument(newData);
+            int index = getHashValue(newData);
+            if (index < 0) {
+                index = toPositive(index);
+            }
+            LinkedList.Node newNode = new LinkedList.Node(newData);
+            table[index].addNode(newNode);
+        }
+
         public boolean contains(String data) {
             isDataIsIllegalArgument(data);
             int index = getHashValue(data);
             if (index < 0 ) {
                 index = toPositive(index);
             }
-            Node current = table[index].head;
+            LinkedList.Node current = table[index].head;
             while (current.next != null) {
                 if (current.data.equals(data)) {
                     return true;
@@ -251,8 +264,8 @@ public class TakingExam extends State{
             if (index < 0 ) {
                 index = toPositive(index);
             }
-            Node current = table[index].head;
-            Node prev = current;
+            LinkedList.Node current = table[index].head;
+            LinkedList.Node prev = current;
             while (current.next != null) {
                 if (current.data.equals(data)) {
                     if(current == head) {
@@ -265,6 +278,19 @@ public class TakingExam extends State{
                 prev = current;
                 current = current.next;
             }
+        }
+
+        public String getdata(int id) {
+            for(int index = 0; index < table.length; index++) {
+                Node current = table[index].head;
+                while(current != null) {
+                    if(current.getId() == id) {
+                        return current.getData();
+                    }
+                    current = current.next;
+                }
+            }
+            return null;
         }
 
         private void isDataIsIllegalArgument(String data) {
@@ -285,8 +311,5 @@ public class TakingExam extends State{
         private int toPositive(int num) {
             return num * NEGATIVE_ONE;
         }
-
-
-
     }
 }
