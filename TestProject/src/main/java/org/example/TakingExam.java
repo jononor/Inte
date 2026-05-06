@@ -92,7 +92,7 @@ public class TakingExam extends State{
     public StateMachine.States getNextState(int result) {
         StateMachine.States nextState;
         result = result - 1;
-        //Question currentQuestion = table.get(questionsAnswered);
+        Question currentQuestion = table[0].getQuestion(questionsAnswered);
         Question currentQuestion = questions.get(questionsAnswered);
         if(questionsAnswered == QUESTIONS_TO_BEAT_GAME) {
             System.out.println("Congratulations! You have completed the exam!");
@@ -280,17 +280,18 @@ public class TakingExam extends State{
             }
         }
 
-        public String getdata(int id) {
+        public String getQuestion(int id) {
+            String str = "Empty question";
             for(int index = 0; index < table.length; index++) {
                 Node current = table[index].head;
                 while(current != null) {
                     if(current.getId() == id) {
-                        return current.getData();
+                        str = current.getData();
                     }
                     current = current.next;
                 }
             }
-            return null;
+            return str;
         }
 
         private void isDataIsIllegalArgument(String data) {
