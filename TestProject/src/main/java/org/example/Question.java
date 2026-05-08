@@ -10,7 +10,7 @@ public class Question {
         this.correctAnswer = correctAnswer;
     }
 
-    public String getQuestion() {
+    public String getQuestionWording() {
         return question;
     }
 
