@@ -40,12 +40,12 @@ public class TakingExam extends State{
     }
 
     public static class LinkedList {
-        private static int count = 0;
+        //private static int count = 0;
         private Node head;
         private int size;
 
         public static class Node {
-            private int id;
+            //private int id;
             private Question question;
             private LinkedList list;
             private Node next;
@@ -53,15 +53,17 @@ public class TakingExam extends State{
             public Node(Question question) {
                 this.question = question;
                 this.list = new LinkedList();
-                this.id = count++;
+                //this.id = count++;
             }
 
             public String getQuestionWording() {
                 return question.getQuestionWording();
             }
+            /*
             public int getId() {
                 return id;
             }
+            */
             public Question getQuestion() {
                 return question;
             }
@@ -82,7 +84,7 @@ public class TakingExam extends State{
                 }
                 Node other = (Node) obj;
                 boolean sameQuestion = hasSameQuestionWording(other) && hasSameAnswer(other);
-                if (sameQuestion && hasSameId(other)) {
+                if (sameQuestion) {
                     return true;
                 }
                 return false;
@@ -93,15 +95,19 @@ public class TakingExam extends State{
             private boolean hasSameAnswer(Node other) {
                 return this.getCorrectAnswer() == other.getCorrectAnswer();
             }
+            /*
             private boolean hasSameId(Node other) {
                 return this.id == other.id;
             }
+            */
 
         }
 
+        /*
         public static int getCount() {
             return count;
         }
+        */
         public int getSize() {
             return size;
         }
@@ -176,7 +182,6 @@ public class TakingExam extends State{
             for(int index = 0; index < table.length; index++) {
                 Node current = table[index].head;
                 while(current != null) {
-                    System.out.println("Node id: " + current.getId());
                     if(current.getQuestion().getCorrectAnswer() == questionsAnswered + 1) {
                         question = current.getQuestion();
                     }
