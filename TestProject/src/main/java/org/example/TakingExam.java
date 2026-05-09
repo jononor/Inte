@@ -3,7 +3,6 @@ package org.example;
 import java.util.*;
 
 public class TakingExam extends State{
-
     private static final int QUESTIONS_TO_BEAT_GAME = 9;
     private static final int PRIM_NUMBER_FIVE = 5;
     private static final int PRIM_NUMBER_THREE = 3;
@@ -12,15 +11,11 @@ public class TakingExam extends State{
     private static LinkedList[] table;
     private int questionsAnswered = 0;
 
-
     /**
      * ska inte vara i klassen. Är igentligen en global variabel. ÄR bara här för tydliggöra hur getChoices metoden använder courseBook
      * courseBook Ska alltid vara minimun fyra. Leave exam valet + de 3 start böckerna
      */
     private int courseBooksAndLeaveExam;
-
-    public List<Question> questions = new ArrayList<>();
-
 
     public TakingExam(InputReader inputReader, StateMachine stateMachine) {
         super(inputReader, stateMachine);
@@ -29,6 +24,7 @@ public class TakingExam extends State{
         for (int index = 0; index < table.length; index++) {
             table[index] = new LinkedList();
         }
+        fillQuestionList();
 
         choices.add("Leave exam");
         choices.add("CourseBook 1");
@@ -41,7 +37,6 @@ public class TakingExam extends State{
         choices.add("CourseBook 8");
         choices.add("CourseBook 9");
         choices.add("CourseBook 10");
-        fillQuestionList();
     }
 
     /**
@@ -63,16 +58,13 @@ public class TakingExam extends State{
         questionsAnswered++;
     }
 
-
     public List<String> getChoices(List<String> playerOptions) {
         Question currentQuestion = table[0].getQuestion(questionsAnswered);
-        //Question currentQuestion = questions.get(questionsAnswered);
         System.out.println(currentQuestion.getQuestionWording());
 
         for (int foundCourseBooks = 0; foundCourseBooks < courseBooksAndLeaveExam; foundCourseBooks++) {
             playerOptions.add(choices.get(foundCourseBooks));
         }
-
         return playerOptions;
     }
 
@@ -99,10 +91,8 @@ public class TakingExam extends State{
             System.out.println("Wrong answer!");
             nextState = StateMachine.States.valueOf("TAKING_EXAM");
         }
-
         return nextState;
     }
-
 
     private void fillQuestionList() {
         Question question1 = new Question("First question: What is a Integer", 1);
@@ -283,12 +273,13 @@ public class TakingExam extends State{
             }
         }
 
-        public Question getQuestion(int id) {
+        public Question getQuestion(int questionsAnswered) {
             Question question = null;
             for(int index = 0; index < table.length; index++) {
                 Node current = table[index].head;
                 while(current != null) {
-                    if(current.getId() == id) {
+                    System.out.println("Node id: " + current.getId());
+                    if(current.getQuestion().getCorrectAnswer() == questionsAnswered + 1) {
                         question = current.getQuestion();
                     }
                     current = current.next;
