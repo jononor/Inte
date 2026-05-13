@@ -82,10 +82,11 @@ public class TakingExam extends State{
                 if (obj == null) {
                     return false;
                 }
-                Node other = (Node) obj;
-                boolean sameQuestion = hasSameQuestionWording(other) && hasSameAnswer(other);
-                if (sameQuestion) {
-                    return true;
+                if (obj instanceof Node other) {
+                    boolean sameQuestion = hasSameQuestionWording(other) && hasSameAnswer(other);
+                    if (sameQuestion) {
+                        return true;
+                    }
                 }
                 return false;
             }
@@ -219,10 +220,11 @@ public class TakingExam extends State{
         if (this == obj) {
             return true;
         }
-        TakingExam other = (TakingExam) obj;
-        for (int index = 0; index < table.length; index++) {
-            if (!table[index].equals(other.table[index])) {
-                return false;
+        if (obj instanceof TakingExam other) {
+            for (int index = 0; index < table.length; index++) {
+                if (!table[index].equals(other.table[index])) {
+                    return false;
+                }
             }
         }
         return true;
