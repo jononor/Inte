@@ -115,8 +115,8 @@ public class TakingExam extends State{
         public void increaseListSize() {
             size++;
         }
-        public LinkedList getTable() {
-            return table[size];
+        public LinkedList[] getTable() {
+            return table;
         }
 
         public void addData(Question newQuestion) {
