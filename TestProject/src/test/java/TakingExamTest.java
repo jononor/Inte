@@ -136,9 +136,48 @@ public class TakingExamTest {
     @Test
     void checkGetHashValue() {
         TakingExam exam = new TakingExam(new InputReader(), new StateMachine());
-        Question newQuestion = new Question("First question: What is a Integer", 1);
+        Question newQuestion = new Question("a".repeat(10000), 1);
         TakingExam.LinkedList[] table = exam.getTable();
-        table[0].addData(newQuestion);
+        //table[0].addData(newQuestion);
+        assertDoesNotThrow(() -> table[0].addData(newQuestion));
     }
+
+    @Test
+    void questionRemovedAfterOverwrite() {
+        TakingExam exam = new TakingExam(new InputReader(), new StateMachine());
+        TakingExam.LinkedList[] table = exam.getTable();
+        Question newQuestion = new Question("What is the biggest building?", 50);
+        table[0].addData(newQuestion);
+
+        TakingExam newExam = new TakingExam(new InputReader(), new StateMachine());
+
+        String questionRemoved = null;
+        assertEquals(questionRemoved,table[0].getQuestion(49));
+    }
+
+    @Test
+    void removeRetainsDeletedQuestion() {
+        TakingExam exam = new TakingExam(new InputReader(), new StateMachine());
+        TakingExam.LinkedList[] table = exam.getTable();
+        Question question = new Question("How big is the Big Ben ", 25);
+        table[0].addData(question);
+        table[0].remove(question);
+
+        boolean tableContainsQuestion = true;
+        assertEquals(tableContainsQuestion, table[0].contains(question));
+    }
+
+    @Test
+    void addDataThrowsIllegalArgumentIfQuestionWordingIsNull() {
+        TakingExam exam = new TakingExam(new InputReader(), new StateMachine());
+        TakingExam.LinkedList[] table = exam.getTable();
+
+        Question newQuestion = new Question(null, 40);
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            table[0].addData(newQuestion);
+        });
+    }
+
+
 }
-//testa buffer overflow på

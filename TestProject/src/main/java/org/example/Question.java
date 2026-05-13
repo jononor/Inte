@@ -2,16 +2,16 @@ package org.example;
 
 public class Question {
 
-    private final String question;
+    private final String questionWording;
     private final int correctAnswer;
 
-    public Question(String question, int correctAnswer) {
-        this.question = question;
+    public Question(String questionWording, int correctAnswer) {
+        this.questionWording = questionWording;
         this.correctAnswer = correctAnswer;
     }
 
     public String getQuestionWording() {
-        return question;
+        return questionWording;
     }
 
     public int getCorrectAnswer() {
