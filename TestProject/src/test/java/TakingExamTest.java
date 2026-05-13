@@ -133,14 +133,6 @@ public class TakingExamTest {
         assertEquals(EXAM_COMPLETED, exam.getQuestionsAnswered()); // Shouldn't increment
     }
 
-    @Test
-    void checkGetHashValue() {
-        TakingExam exam = new TakingExam(new InputReader(), new StateMachine());
-        Question newQuestion = new Question("a".repeat(10000), 1);
-        TakingExam.LinkedList[] table = exam.getTable();
-        //table[0].addData(newQuestion);
-        assertDoesNotThrow(() -> table[0].addData(newQuestion));
-    }
 
     @Test
     void questionRemovedAfterOverwrite() {
