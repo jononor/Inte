@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -132,6 +133,12 @@ public class TakingExamTest {
         assertEquals(EXAM_COMPLETED, exam.getQuestionsAnswered()); // Shouldn't increment
     }
 
-
+    @Test
+    void checkGetHashValue() {
+        TakingExam exam = new TakingExam(new InputReader(), new StateMachine());
+        Question newQuestion = new Question("First question: What is a Integer", 1);
+        TakingExam.LinkedList[] table = exam.getTable();
+        table[0].addData(newQuestion);
+    }
 }
 //testa buffer overflow på

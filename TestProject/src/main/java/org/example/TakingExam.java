@@ -115,9 +115,6 @@ public class TakingExam extends State{
         public void increaseListSize() {
             size++;
         }
-        public LinkedList[] getTable() {
-            return table;
-        }
 
         public void addData(Question newQuestion) {
             isQuestionWordingIllegalArgument(newQuestion.getQuestionWording());
@@ -236,6 +233,10 @@ public class TakingExam extends State{
     @Override
     public int hashCode() {
         return PRIM_NUMBER_FIVE * PRIM_NUMBER_THREE;
+    }
+
+    public LinkedList[] getTable() {
+        return table;
     }
 
     public void increaseQuestionsAnswered() {
