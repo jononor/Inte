@@ -12,7 +12,7 @@ public class TakingExam extends State{
     private int questionsAnswered = 0;
 
     /**
-     * ska inte vara i klassen. Är igentligen en global variabel. ÄR bara här för tydliggöra hur getChoices metoden använder courseBook
+     * variabeln ska inte vara i klassen. Är igentligen en global variabel. ÄR bara här för tydliggöra hur getChoices metoden använder courseBook
      * courseBook Ska alltid vara minimun fyra. Leave exam valet + de 3 start böckerna
      */
     private int courseBooksAndLeaveExam;
@@ -40,12 +40,10 @@ public class TakingExam extends State{
     }
 
     public static class LinkedList {
-        //private static int count = 0;
         private Node head;
         private int size;
 
         public static class Node {
-            //private int id;
             private Question question;
             private LinkedList list;
             private Node next;
@@ -53,17 +51,12 @@ public class TakingExam extends State{
             public Node(Question question) {
                 this.question = question;
                 this.list = new LinkedList();
-                //this.id = count++;
             }
 
             public String getQuestionWording() {
                 return question.getQuestionWording();
             }
-            /*
-            public int getId() {
-                return id;
-            }
-            */
+
             public Question getQuestion() {
                 return question;
             }
@@ -96,19 +89,8 @@ public class TakingExam extends State{
             private boolean hasSameAnswer(Node other) {
                 return this.getCorrectAnswer() == other.getCorrectAnswer();
             }
-            /*
-            private boolean hasSameId(Node other) {
-                return this.id == other.id;
-            }
-            */
-
         }
 
-        /*
-        public static int getCount() {
-            return count;
-        }
-        */
         public int getSize() {
             return size;
         }
@@ -257,7 +239,6 @@ public class TakingExam extends State{
         StateMachine.States nextState;
         result = result - 1;
         Question currentQuestion = table[0].getQuestion(questionsAnswered);
-        //Question currentQuestion = questions.get(questionsAnswered);
         if(questionsAnswered == QUESTIONS_TO_BEAT_GAME) {
             System.out.println("Congratulations! You have completed the exam!");
             nextState = StateMachine.States.valueOf("COMPLETING_GAME");
@@ -276,21 +257,6 @@ public class TakingExam extends State{
             nextState = StateMachine.States.valueOf("TAKING_EXAM");
         }
         return nextState;
-    }
-
-    /**
-     * metoden har ingen betydelse utöver att testa klassen
-     */
-    public int setCollectedBooksAndLeaveExam(int number) {
-        courseBooksAndLeaveExam = number;
-        return courseBooksAndLeaveExam;
-    }
-
-    /**
-     * metoden har ingen betydelse utöver att testa klassen
-     */
-    public int getQuestionsAnswered() {
-        return questionsAnswered;
     }
 
     private void fillQuestionList() {
