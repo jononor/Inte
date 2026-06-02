@@ -259,6 +259,21 @@ public class TakingExam extends State{
         return nextState;
     }
 
+    /**
+     * metoden har ingen betydelse utöver att testa klassen
+     */
+    public int setCollectedBooksAndLeaveExam(int number) {
+        courseBooksAndLeaveExam = number;
+        return courseBooksAndLeaveExam;
+    }
+
+    /**
+     * metoden har ingen betydelse utöver att testa klassen
+     */
+    public int getQuestionsAnswered() {
+        return questionsAnswered;
+    }
+
     private void fillQuestionList() {
         Question question1 = new Question("First question: What is a Integer", 1);
         table[0].addData(question1);
