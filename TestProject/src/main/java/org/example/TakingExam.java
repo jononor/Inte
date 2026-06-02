@@ -249,7 +249,7 @@ public class TakingExam extends State{
             nextState = StateMachine.States.valueOf("TAKING_EXAM");
 
         } else if (result == 0) {
-            System.out.println("bye bye");
+            System.out.println("bye, come back and take the exam soon!");
             nextState = StateMachine.States.valueOf("HUBWORLD");
 
         } else {

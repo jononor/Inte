@@ -127,9 +127,12 @@ public class TakingExamTest {
 
         exam.setCollectedBooksAndLeaveExam(PLAYER_START_BOOKS_AND_LEAVE_EXAM);
         choices = exam.getChoices(new ArrayList<>());
+        /*
         for (int printChoices = 0; printChoices < choices.size(); printChoices++) {
             System.out.println((printChoices + 1) + ". " + choices.get(printChoices));
         }
+
+         */
 
         int playersChoice = new InputReader().getUserChoice(choices);
         StateMachine.States nextState = exam.getNextState(playersChoice);
@@ -148,9 +151,7 @@ public class TakingExamTest {
         }
 
         choices = exam.getChoices(new ArrayList<>());
-        for (int printChoices = 0; printChoices < choices.size(); printChoices++) {
-            System.out.println((printChoices + 1) + ". " + choices.get(printChoices));
-        }
+
         int playersChoice = new InputReader().getUserChoice(choices);
         StateMachine.States nextState = exam.getNextState(playersChoice);
 
