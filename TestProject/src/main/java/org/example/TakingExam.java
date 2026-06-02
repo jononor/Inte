@@ -45,12 +45,10 @@ public class TakingExam extends State{
 
         public static class Node {
             private Question question;
-            private LinkedList list;
             private Node next;
 
             public Node(Question question) {
                 this.question = question;
-                this.list = new LinkedList();
             }
 
             public String getQuestionWording() {
@@ -63,9 +61,7 @@ public class TakingExam extends State{
             public int getCorrectAnswer() {
                 return question.getCorrectAnswer();
             }
-            public LinkedList getList() {
-                return list;
-            }
+
 
             @Override
             public boolean equals(Object obj) {
