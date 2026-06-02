@@ -13,8 +13,6 @@ import java.util.List;
 
 
 public class TakingExamTest {
-
-
     /**
      * spelarn ska kunna ta examen direkt om den vill.
      * Spelaren börjar med 3 böcker. Anledningen att numret är 4, 6, 11 är att valet "Leave exam" ska alltid vara möjligt,
@@ -32,16 +30,10 @@ public class TakingExamTest {
     private TakingExam exam;
     private List<String> choices;
 
-
-
     @BeforeEach
     void storeStandardSystemIn() {
         exam = new TakingExam(new InputReader(), new StateMachine());
     }
-
-
-
-
 
 
     @Test
@@ -77,9 +69,6 @@ public class TakingExamTest {
             table[0].addData(newQuestion);
         });
     }
-
-
-
 
     @Test
     void withOnlyThe_StartingBooksFound_TestGetNextState_AndAnswersQuestionCorrectly() {
@@ -129,7 +118,6 @@ public class TakingExamTest {
         StateMachine.States nextState = exam.getNextState(playersChoice);
         assertEquals(StateMachine.States.HUBWORLD, nextState);
     }
-
 
     @Test
     void withAll_Of_Total_Books_TestGetNextState_AndFinishExam() {
