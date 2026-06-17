@@ -1,4 +1,4 @@
-package test.java;
+package org.example;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.example.*;
@@ -49,13 +49,13 @@ public class TakingExamTest {
     }
 
     @Test
-    void removeRetainsDeletedQuestion() {
+    void removeQuestion() {
         TakingExam.LinkedList[] table = exam.getTable();
         Question question = new Question("How big is the Big Ben ", 25);
         table[0].addData(question);
         table[0].remove(question);
 
-        boolean tableContainsQuestion = true;
+        boolean tableContainsQuestion = false;
         assertEquals(tableContainsQuestion, table[0].contains(question));
     }
 
@@ -68,6 +68,75 @@ public class TakingExamTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             table[0].addData(newQuestion);
         });
+    }
+
+    @Test
+    void addDataThrowsIllegalArgumentIfQuestionWordingIsStringLengthZero() {
+        TakingExam.LinkedList[] table = exam.getTable();
+
+        Question newQuestion = new Question("  ", 20);
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            table[0].addData(newQuestion);
+        });
+    }
+
+
+    @Test
+    void removeLastQuestion() {
+        TakingExam.LinkedList[] table = exam.getTable();
+        Question questionLongFinger = new Question("What is the longest finger", 25);
+        Question questionSmallestCountry = new Question("What is the smallest country", 67);
+
+        table[0].addData(questionLongFinger);
+
+        table[0].addData(questionSmallestCountry);
+        table[0].remove(questionSmallestCountry);
+
+        assertTrue(table[0].contains(questionLongFinger));
+
+        assertFalse(table[0].contains(questionSmallestCountry));
+    }
+
+    @Test
+    void removeNonExistingQuestion() {
+        TakingExam.LinkedList[] table = exam.getTable();
+        Question questionFastestCar = new Question("What is the fastest car", 11);
+        Question questionBiggestOcean = new Question("What is the biggest ocean", 12);
+
+        table[0].addData(questionFastestCar);
+
+        table[0].remove(questionBiggestOcean);
+
+        assertTrue(table[0].contains(questionFastestCar));
+    }
+
+    @Test
+    void hashCodeReturnsFifteen() {
+        TakingExam exam = new TakingExam(new InputReader(), new StateMachine());
+        assertEquals(15, exam.hashCode());
+
+    }
+
+    @Test
+    void getMethodsReturnsCorrectAnswer() {
+        TakingExam.LinkedList.Node node = new TakingExam.LinkedList.Node(new Question("What is the longest Animal", 5));
+
+        assertEquals(5, node.getCorrectAnswer());
+    }
+
+    @Test
+    void nodesWithSameQuestionEquals() {
+        //Noder med samma fråga
+        TakingExam.LinkedList.Node nodeOne = new TakingExam.LinkedList.Node(new Question("Can you lick your elbow", 10));
+        TakingExam.LinkedList.Node nodeTwo = new TakingExam.LinkedList.Node(new Question("Can you lick your elbow", 10));
+
+        //Nod med en annordlunda fråga
+        TakingExam.LinkedList.Node nodeThree = new TakingExam.LinkedList.Node(new Question("What is the height of Eiffel Tower", 5));
+
+        assertEquals(nodeOne, nodeTwo);
+
+        assertNotEquals(nodeOne, nodeThree);
     }
 
     @Test

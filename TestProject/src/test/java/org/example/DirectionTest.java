@@ -1,4 +1,4 @@
-package test.java;
+package org.example;
 
 import org.example.Direction;
 import org.junit.jupiter.api.BeforeEach;

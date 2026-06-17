@@ -1,4 +1,4 @@
-package test.java;
+package org.example;
 
 import org.example.Enemy;
 import org.junit.jupiter.api.Test;

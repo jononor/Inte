@@ -51,13 +51,10 @@ public class TakingExam extends State{
                 this.question = question;
             }
 
-            public String getQuestionWording() {
-                return question.getQuestionWording();
-            }
-
             public Question getQuestion() {
                 return question;
             }
+
             public int getCorrectAnswer() {
                 return question.getCorrectAnswer();
             }
@@ -87,9 +84,7 @@ public class TakingExam extends State{
             }
         }
 
-        public int getSize() {
-            return size;
-        }
+
         public void increaseListSize() {
             size++;
         }
@@ -144,11 +139,13 @@ public class TakingExam extends State{
             Node prev = current;
             while (current != null) {
                 if (current.getQuestion().equals(question)) {
-                    if(current == head) {
-                        head = current.next;
+                    if(current == table[index].head) {
+                        table[index].head = current.next;
+                        prev = null;
+                        return;
                     }
                     prev.next = current.next;
-                    current.next = null;
+                    current = current.next;
                     return;
                 }
                 prev = current;

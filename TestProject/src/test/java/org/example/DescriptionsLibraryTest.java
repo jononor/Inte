@@ -1,4 +1,4 @@
-package test.java;
+package org.example;
 
 import org.example.DescriptionLibrary;
 import org.junit.jupiter.api.BeforeEach;
