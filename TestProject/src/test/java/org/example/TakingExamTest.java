@@ -81,7 +81,6 @@ public class TakingExamTest {
         });
     }
 
-
     @Test
     void removeLastQuestion() {
         TakingExam.LinkedList[] table = exam.getTable();
@@ -89,8 +88,9 @@ public class TakingExamTest {
         Question questionSmallestCountry = new Question("What is the smallest country", 67);
 
         table[0].addData(questionLongFinger);
-
         table[0].addData(questionSmallestCountry);
+
+        table[0].remove(questionSmallestCountry);
         table[0].remove(questionSmallestCountry);
 
         assertTrue(table[0].contains(questionLongFinger));
@@ -99,31 +99,34 @@ public class TakingExamTest {
     }
 
     @Test
-    void removeNonExistingQuestion() {
-        TakingExam.LinkedList[] table = exam.getTable();
-        Question questionFastestCar = new Question("What is the fastest car", 11);
-        Question questionBiggestOcean = new Question("What is the biggest ocean", 12);
-
-        table[0].addData(questionFastestCar);
-
-        table[0].remove(questionBiggestOcean);
-
-        assertTrue(table[0].contains(questionFastestCar));
-    }
-
-    @Test
-    void hashCodeReturnsFifteen() {
-        TakingExam exam = new TakingExam(new InputReader(), new StateMachine());
-        assertEquals(15, exam.hashCode());
-
-    }
-
-    @Test
     void getMethodsReturnsCorrectAnswer() {
         TakingExam.LinkedList.Node node = new TakingExam.LinkedList.Node(new Question("What is the longest Animal", 5));
+        int correctAnswer = 5;
 
         assertEquals(5, node.getCorrectAnswer());
     }
+
+    @Test
+    void nodeEqualsTheSameNode() {
+        TakingExam.LinkedList.Node node = new TakingExam.LinkedList.Node(new Question("What city is the largest", 4));
+
+        assertTrue(node.equals(node));
+    }
+
+    @Test
+    void nodeNotEqualsNull() {
+        TakingExam.LinkedList.Node node = new TakingExam.LinkedList.Node(new Question("How big is the brain", 11));
+
+        assertFalse(node.equals(null));
+    }
+
+    @Test
+    void nodeNotEqualsOtherObjects() {
+        TakingExam.LinkedList.Node node = new TakingExam.LinkedList.Node(new Question("What city is the fish", 4));
+
+        assertFalse(node.equals("String"));
+    }
+
 
     @Test
     void nodesWithSameQuestionEquals() {
@@ -133,10 +136,12 @@ public class TakingExamTest {
 
         //Nod med en annordlunda fråga
         TakingExam.LinkedList.Node nodeThree = new TakingExam.LinkedList.Node(new Question("What is the height of Eiffel Tower", 5));
+        TakingExam.LinkedList.Node nodeFour = new TakingExam.LinkedList.Node(new Question("Can you lick your elbow", 50));
 
-        assertEquals(nodeOne, nodeTwo);
+        assertTrue(nodeOne.equals(nodeTwo));
 
-        assertNotEquals(nodeOne, nodeThree);
+        assertFalse(nodeOne.equals(nodeThree));
+        assertFalse(nodeOne.equals(nodeFour));
     }
 
     @Test

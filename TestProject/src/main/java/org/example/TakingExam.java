@@ -187,29 +187,6 @@ public class TakingExam extends State{
         }
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (this == obj) {
-            return true;
-        }
-        if (obj instanceof TakingExam other) {
-            for (int index = 0; index < table.length; index++) {
-                if (!table[index].equals(other.table[index])) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return PRIM_NUMBER_FIVE * PRIM_NUMBER_THREE;
-    }
-
     public LinkedList[] getTable() {
         return table;
     }
